@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
-# @Last Modified by:   Prabhakar Gupta
-# @Last Modified time: 2016-01-09 02:11:32
+# @Last Modified by:   Sahil Dua
+# @Last Modified time: 2016-01-09 03:07:29
 
 
 # from __future__ import unicode_literals
@@ -15,11 +15,17 @@ import datetime
 
 GENDER 	= (	('M', 'Male'),
 			('F', 'Female'),
-			('ND', 'Not Defined'))
+			('ND', 'Not Defined'),
+			)
 
 
-WEBSITE_TYPE = ((1, 'unrecognized'),
-				(2, 'Github'))
+WEBSITE_TYPE = (('na', 'unrecognized'),
+				('gh', 'Github'),
+				('ln', 'LinkedIn'),
+				('pw', 'Personal Website'),
+				('tw', 'Twitter'),
+				('fb', 'Facebook'),
+				)
 
 
 class Award(EmbeddedDocument):
@@ -85,7 +91,7 @@ class Skill(EmbeddedDocument):
 
 class Website(EmbeddedDocument):
 	url = URLField(verify_exists=True)
-	website_type = IntField(max_length=2, choices=WEBSITE_TYPE)
+	website_type = StringField(max_length=3, choices=WEBSITE_TYPE)
 
 	def __str__(self):
 		return self.url
