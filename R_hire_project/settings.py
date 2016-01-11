@@ -12,9 +12,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
-# connect to the MongoDB using mongoengine
-from mongoengine import connect
-connect('r_hire')
+from DbDetails import *
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -87,7 +86,12 @@ WSGI_APPLICATION = 'R_hire_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.dummy',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': '',
     }
 }
 
