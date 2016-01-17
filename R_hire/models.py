@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
-# @Last Modified by:   sahildua2305
-# @Last Modified time: 2016-01-12 03:37:23
+# @Last Modified by:   Prabhakar Gupta
+# @Last Modified time: 2016-01-17 20:14:47
 
 
 from __future__ import unicode_literals
@@ -26,35 +26,35 @@ WEBSITE_TYPE = (('na', 'unrecognized'),
 				)
 
 
-class Candidate(models.Model):
-	fname = models.CharField('First name', max_length=200)
-	lname = models.CharField('Last name', max_length=200)
-	photo_url = models.CharField(max_length=500)
-	last_school = models.CharField(max_length=1000)
+# class Candidate(models.Model):
+# 	fname = models.CharField(max_length=200, verbose_name="First name")
+# 	lname = models.CharField(max_length=200, verbose_name="Last name")
+# 	photo_url = models.CharField(max_length=500)
+# 	last_school = models.CharField(max_length=1000)
 
 
-class CandidateLogin(models.Model):
-	candidate = models.OneToOneField(Candidate, on_delete=models.CASCADE, verbose_name="related candidate", null=True, blank=True)
-	email = models.CharField(max_length=500)
-	password = models.CharField(max_length=500)
-	created_tx = models.DateTimeField('Created at')
+# class CandidateLogin(models.Model):
+# 	candidate = models.OneToOneField(Candidate, on_delete=models.CASCADE, verbose_name="related candidate", null=True, blank=True)
+# 	email = models.CharField(max_length=500)
+# 	password = models.CharField(max_length=500)
+# 	created_tx = models.DateTimeField('Created at')
 
-	class Meta:
-		db_table = "R_hire_candidate_login"
+# 	class Meta:
+# 		db_table = "R_hire_candidate_login"
 
 
-class CandidateDetails(models.Model):
-	candidate = models.OneToOneField(Candidate, on_delete=models.CASCADE, verbose_name="related candidate", null=True, blank=True)
-	summary = models.TextField()
-	current_location = models.CharField(max_length=200)
-	gender = models.CharField(max_length=1, default='M', choices = GENDER_LIST)
-	resume_url = models.CharField(max_length=200)
-	contact_number = models.CharField(max_length=20)
-	address = models.TextField()
-	dob = models.DateField()
+# class CandidateDetails(models.Model):
+# 	candidate = models.OneToOneField(Candidate, on_delete=models.CASCADE, verbose_name="related candidate", null=True, blank=True)
+# 	summary = models.TextField()
+# 	current_location = models.CharField(max_length=200)
+# 	gender = models.CharField(max_length=1, default='M', choices = GENDER_LIST)
+# 	resume_url = models.CharField(max_length=200)
+# 	contact_number = models.CharField(max_length=20)
+# 	address = models.TextField()
+# 	dob = models.DateField()
 
-	class Meta:
-		db_table = "R_hire_candidate_details"
+# 	class Meta:
+# 		db_table = "R_hire_candidate_details"
 
 
 # class Awards(models.Model):
@@ -65,101 +65,137 @@ class CandidateDetails(models.Model):
 # 	start_month = models.IntegerField()
 
 
-# class Award(EmbeddedDocument):
-# 	title = StringField(max_length=200, required=True)
-# 	issuer = StringField(max_length=400)
-# 	description = StringField()
-# 	start_date = DateTimeField(default=datetime.datetime.now)
+class Award(models.Model):
+	title = models.CharField(max_length=200, blank=False)
+	issuer = models.CharField(max_length=400)
+	description = models.TextField(max_length=None)
+	start_date = models.DateTimeField(default=None)
+	candidate = models.ForeignKey(
+        'Candidate',
+        on_delete=models.CASCADE,
+    )
 
-# 	def __str__(self):
-# 		return self.title
-
-
-# class Course(EmbeddedDocument):
-# 	title = StringField(max_length=100, required=True)
-# 	authority = StringField(max_length=400)
-# 	description = StringField()
-# 	date = DateTimeField(default=datetime.datetime.now)
-
-# 	def __str__(self):
-# 		return self.title
+	def __str__(self):
+		return self.title
 
 
-# class Education(EmbeddedDocument):
-# 	school = StringField(max_length=200, required=True)
-# 	degree = StringField(max_length=200, required=True)
-# 	major = StringField(max_length=200)
-# 	start_date = DateTimeField(default=datetime.datetime.now)
-# 	end_date = DateTimeField(default=datetime.datetime.now)
-# 	grade = StringField(max_length=20)
-# 	description = StringField()
+class Course(models.Model):
+	title = models.CharField(max_length=100, blank=False)
+	authority = models.CharField(max_length=400)
+	description = models.TextField(max_length=None)
+	date = models.DateTimeField(default=None)
+	candidate = models.ForeignKey(
+        'Candidate',
+        on_delete=models.CASCADE,
+    )
 
-# 	def __str__(self):
-# 		return self.degree
-
-
-# class Experience(EmbeddedDocument):
-# 	company = StringField(max_length=200, required=True)
-# 	position = StringField(max_length=200, required=True)
-# 	start_date = DateTimeField(default=datetime.datetime.now)
-# 	end_date = DateTimeField(default=datetime.datetime.now)
-# 	description = StringField()
-
-# 	def __str__(self):
-# 		return self.company
+	def __str__(self):
+		return self.title
 
 
-# class Project(EmbeddedDocument):
-# 	title = StringField(max_length=200, required=True)
-# 	description = StringField()
-# 	url = URLField(verify_exists=True)
-# 	end_date = DateTimeField(default=datetime.datetime.now)
+class Education(models.Model):
+	school = models.CharField(max_length=200, blank=False)
+	degree = models.CharField(max_length=200, blank=False)
+	major = models.CharField(max_length=200)
+	start_date = models.DateTimeField(default=None)
+	end_date = models.DateTimeField(default=None)
+	grade = models.CharField(max_length=20)
+	description = models.TextField(max_length=None)
+	candidate = models.ForeignKey(
+        'Candidate',
+        on_delete=models.CASCADE,
+    )
 
-# 	def __str__(self):
-# 		return self.title
-
-
-# class Skill(EmbeddedDocument):
-# 	title = StringField(max_length=200)
-
-# 	def __str__(self):
-# 		return self.title
-
-
-# class Website(EmbeddedDocument):
-# 	url = URLField(verify_exists=True)
-# 	website_type = StringField(max_length=3, choices=WEBSITE_TYPE)
-
-# 	def __str__(self):
-# 		return self.url
+	def __str__(self):
+		return self.degree
 
 
-# class Candidate(Document):
-# 	fname = StringField(verbose_name='First Name',max_length=200,required=True)
-# 	lname = StringField(verbose_name='Last Name', max_length=200)
+class Experience(models.Model):
+	company = models.CharField(max_length=200, blank=False)
+	position = models.CharField(max_length=200, blank=False)
+	start_date = models.DateTimeField(default=None)
+	end_date = models.DateTimeField(default=None)
+	description = models.TextField(max_length=None)
+	candidate = models.ForeignKey(
+        'Candidate',
+        on_delete=models.CASCADE,
+    )
+
+	def __str__(self):
+		return self.company
+
+
+class Project(models.Model):
+	title = models.CharField(max_length=200, blank=False)
+	description = models.TextField(max_length=None)
+	url = models.URLField(default=None)
+	end_date = models.DateTimeField(default=None)
+	candidate = models.ForeignKey(
+        'Candidate',
+        on_delete=models.CASCADE,
+    )
+
+	def __str__(self):
+		return self.title
+
+
+class Skill(models.Model):
+	title = models.CharField(max_length=200)
+	candidate = models.ForeignKey(
+		'Candidate',
+		on_delete=models.CASCADE
+	)
+
+	def __str__(self):
+		return self.title
+
+
+class Website(models.Model):
+	url = models.URLField(default=None)
+	website_type = models.CharField(max_length=3, choices=WEBSITE_TYPE)
+	candidate = models.ForeignKey(
+        'Candidate',
+        on_delete=models.CASCADE,
+    )
+
+	def __str__(self):
+		return self.url
+
+
+class Candidate(models.Model):
+	fname = models.CharField(verbose_name='First Name',max_length=200,blank=False)
+	lname = models.CharField(verbose_name='Last Name', max_length=200)
 	
-# 	photo_url = URLField(verify_exists=True)
-# 	last_school = StringField(verbose_name='Last School Name', max_length=1000)
+	photo_url = models.URLField(default=None)
+	last_school = models.CharField(verbose_name='Last School Name', max_length=1000)
 	
-# 	email = EmailField(unique=True,required=True)
-# 	password = StringField(max_length=500,required=True)
+	email = models.EmailField(unique=True,blank=False)
+	password = models.CharField(max_length=500,blank=False)
 	
-# 	summary = StringField()
-# 	current_location = StringField(max_length=100)
-# 	gender = StringField(max_length=2, choices=GENDER)
-# 	resume_url = URLField(verify_exists=True)
-# 	contact_number = StringField(max_length=10)
-# 	address = StringField()
-# 	dob = DateTimeField()
+	summary = models.TextField(max_length=None)
+	current_location = models.CharField(max_length=100)
+	gender = models.CharField(max_length=2, choices=GENDER_LIST)
+	resume_url = models.URLField(default=None)
+	contact_number = models.CharField(max_length=10)
+	address = models.TextField(max_length=None)
+	dob = models.DateTimeField(default=None)
 
-# 	awards = ListField(EmbeddedDocumentField('Award'))
-# 	courses = ListField(EmbeddedDocumentField('Course'))
-# 	educations = ListField(EmbeddedDocumentField('Education'))
-# 	experiences = ListField(EmbeddedDocumentField('Experience'))
-# 	projects = ListField(EmbeddedDocumentField('Project'))
-# 	skills = ListField(EmbeddedDocumentField('Skill'))
-# 	websites = ListField(EmbeddedDocumentField('Website'))
+	# awards = OneToMany(to=Award)
+	# courses = OneToMany(to=Course)
+	# educations = OneToMany(to=Education)
+	# experiences = OneToMany(to=Experience)
+	# projects = OneToMany(to=Project)
+	# skills = OneToMany(to=Skill)
+	# websites = OneToMany(to=Website)
 
-# 	def __str__(self):
-# 		return self.fname
+
+	# courses = ListField(EmbeddedDocumentField('Course'))
+	# educations = ListField(EmbeddedDocumentField('Education'))
+	# experiences = ListField(EmbeddedDocumentField('Experience'))
+	# projects = ListField(EmbeddedDocumentField('Project'))
+	# skills = ListField(EmbeddedDocumentField('Skill'))
+	# websites = ListField(EmbeddedDocumentField('Website'))
+
+	def __str__(self):
+		return self.fname
 
