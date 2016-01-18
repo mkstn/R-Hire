@@ -3,8 +3,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static "R_hire/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "R_hire/css/google-fonts.css" %}">
     <link rel="stylesheet" href="{% static "R_hire/css/account.css" %}">
 </head>
 <body>
@@ -24,11 +24,14 @@
 		    </div> -->
 		    <div class="col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
 				{% if form.non_field_errors %}
-				<p class="error">
 					{% for error in form.non_field_errors %}
-						{{ error }}
+						<div class="alert alert-danger alert-dismissible fade in" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">×</span>
+							</button>
+							<strong>{{ error }}</strong>
+						</div>	
 					{% endfor %}
-				</p>
 				{% endif %}
 		        <form id="login-form" method="POST">
 		        	<!-- CSRF token is rendered by Django in forms to avoid CSRF attacks -->
@@ -51,11 +54,14 @@
 							them one by one in a error alert
 							-->
 							{% if field.errors %}
-								<p class="error">
 								{% for error in field.errors %}
-									{{ error }}
+									<div class="alert alert-danger alert-dismissible fade in" role="alert">
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">×</span>
+										</button>
+										<strong>{{ error }}</strong>
+									</div>	
 								{% endfor %}
-								</p>
 							{% endif %}
 						</div>
 					{% endfor %}
@@ -67,5 +73,9 @@
 		    </div>
 		</div>
 	</div>
+
+<script type="text/javascript" src="{% static "R_hire/js/jquery-2.2.0.min.js" %}"></script>
+<script type="text/javascript" src="{% static "R_hire/js/bootstrap.min.js" %}"></script>
+
 </body>
 </html>
