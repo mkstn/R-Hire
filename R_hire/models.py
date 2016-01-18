@@ -3,7 +3,7 @@
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
 # @Last Modified by:   Prabhakar Gupta
-# @Last Modified time: 2016-01-17 20:14:47
+# @Last Modified time: 2016-01-19 02:38:10
 
 
 from __future__ import unicode_literals
@@ -164,21 +164,21 @@ class Website(models.Model):
 
 class Candidate(models.Model):
 	fname = models.CharField(verbose_name='First Name',max_length=200,blank=False)
-	lname = models.CharField(verbose_name='Last Name', max_length=200)
+	lname = models.CharField(verbose_name='Last Name', max_length=200,blank=True,null=True)
 	
-	photo_url = models.URLField(default=None)
-	last_school = models.CharField(verbose_name='Last School Name', max_length=1000)
+	photo_url = models.URLField(default=None,blank=True,null=True)
+	last_school = models.CharField(verbose_name='Last School Name', max_length=1000,blank=True,null=True)
 	
 	email = models.EmailField(unique=True,blank=False)
 	password = models.CharField(max_length=500,blank=False)
 	
-	summary = models.TextField(max_length=None)
-	current_location = models.CharField(max_length=100)
-	gender = models.CharField(max_length=2, choices=GENDER_LIST)
-	resume_url = models.URLField(default=None)
-	contact_number = models.CharField(max_length=10)
-	address = models.TextField(max_length=None)
-	dob = models.DateTimeField(default=None)
+	summary = models.TextField(max_length=None,blank=True,null=True)
+	current_location = models.CharField(max_length=100,blank=True,null=True)
+	gender = models.CharField(max_length=2, choices=GENDER_LIST,blank=True,null=True)
+	resume_url = models.URLField(default=None,blank=True,null=True)
+	contact_number = models.CharField(max_length=10,blank=True,null=True)
+	address = models.TextField(max_length=None,blank=True,null=True)
+	dob = models.DateTimeField(default=None,blank=True,null=True)
 
 	# awards = OneToMany(to=Award)
 	# courses = OneToMany(to=Course)
