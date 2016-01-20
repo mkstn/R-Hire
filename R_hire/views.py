@@ -3,7 +3,7 @@
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
 # @Last Modified by:   Prabhakar Gupta
-# @Last Modified time: 2016-01-19 02:33:53
+# @Last Modified time: 2016-01-21 03:08:17
 
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -13,6 +13,8 @@ from .forms import RegistrationForm
 
 # Import Candidate model 
 from .models import Candidate
+
+import json
 
 
 def index(request):
@@ -30,27 +32,34 @@ def register(request):
 		# is_valid validates a form and returns
 		# True if it is valid and
 		# False if it is invalid
-		if form.is_valid():
-			# TODO: The form is valid and we can save it to the database
-			# by creating a model object and populating the data from the form object
-			# as of now just rendering a success template page
-			
+		if form.is_valid():			
 			first_name	= request.POST['fname']
 			last_name 	= request.POST['lname']
 			email 		= request.POST['email']
 			password 	= request.POST['password']
 
-			new_candidate = Candidate(
-				fname 		= first_name,
-				lname 		= last_name,
-				email		= email,
-				password	= password,
+			# Make an old_candidate object to check whether 
+			# email id has already been used or not
+			old_candidate = Candidate.objects.filter(
+				email = email,
 			)
 
-			new_candidate.save()
+			# if no candidate has used this email id then register the candidate
+			# else throw an error
+			if old_candidate.count() == 0:
+				new_candidate = Candidate(
+					fname 		= first_name,
+					lname 		= last_name,
+					email		= email,
+					password	= password,
+				)
 
+				new_candidate.save()
 
-			return render(request, "R_hire/registration/success.html")
+				return render(request, "R_hire/registration/success.html")
+			else :
+				form.add_error(None, 'Email ID already exists')
+
 	# This means that the request is a GET request. So we need to
 	# create an instance of the RegistrationForm class and render it in the template
 	else:
