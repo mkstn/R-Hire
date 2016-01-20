@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
-# @Last Modified by:   Prabhakar Gupta
-# @Last Modified time: 2016-01-19 02:38:10
+# @Last Modified by:   sahildua2305
+# @Last Modified time: 2016-01-21 04:06:13
 
 
 from __future__ import unicode_literals
@@ -24,45 +24,6 @@ WEBSITE_TYPE = (('na', 'unrecognized'),
 				('tw', 'Twitter'),
 				('fb', 'Facebook'),
 				)
-
-
-# class Candidate(models.Model):
-# 	fname = models.CharField(max_length=200, verbose_name="First name")
-# 	lname = models.CharField(max_length=200, verbose_name="Last name")
-# 	photo_url = models.CharField(max_length=500)
-# 	last_school = models.CharField(max_length=1000)
-
-
-# class CandidateLogin(models.Model):
-# 	candidate = models.OneToOneField(Candidate, on_delete=models.CASCADE, verbose_name="related candidate", null=True, blank=True)
-# 	email = models.CharField(max_length=500)
-# 	password = models.CharField(max_length=500)
-# 	created_tx = models.DateTimeField('Created at')
-
-# 	class Meta:
-# 		db_table = "R_hire_candidate_login"
-
-
-# class CandidateDetails(models.Model):
-# 	candidate = models.OneToOneField(Candidate, on_delete=models.CASCADE, verbose_name="related candidate", null=True, blank=True)
-# 	summary = models.TextField()
-# 	current_location = models.CharField(max_length=200)
-# 	gender = models.CharField(max_length=1, default='M', choices = GENDER_LIST)
-# 	resume_url = models.CharField(max_length=200)
-# 	contact_number = models.CharField(max_length=20)
-# 	address = models.TextField()
-# 	dob = models.DateField()
-
-# 	class Meta:
-# 		db_table = "R_hire_candidate_details"
-
-
-# class Awards(models.Model):
-# 	candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE)
-# 	title = models.CharField(max_length=200)
-# 	issuer = models.CharField(max_length=400)
-# 	description = models.TextField()
-# 	start_month = models.IntegerField()
 
 
 class Award(models.Model):
@@ -179,22 +140,6 @@ class Candidate(models.Model):
 	contact_number = models.CharField(max_length=10,blank=True,null=True)
 	address = models.TextField(max_length=None,blank=True,null=True)
 	dob = models.DateTimeField(default=None,blank=True,null=True)
-
-	# awards = OneToMany(to=Award)
-	# courses = OneToMany(to=Course)
-	# educations = OneToMany(to=Education)
-	# experiences = OneToMany(to=Experience)
-	# projects = OneToMany(to=Project)
-	# skills = OneToMany(to=Skill)
-	# websites = OneToMany(to=Website)
-
-
-	# courses = ListField(EmbeddedDocumentField('Course'))
-	# educations = ListField(EmbeddedDocumentField('Education'))
-	# experiences = ListField(EmbeddedDocumentField('Experience'))
-	# projects = ListField(EmbeddedDocumentField('Project'))
-	# skills = ListField(EmbeddedDocumentField('Skill'))
-	# websites = ListField(EmbeddedDocumentField('Website'))
 
 	def __str__(self):
 		return self.fname
