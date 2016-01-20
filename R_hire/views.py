@@ -3,10 +3,13 @@
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
 # @Last Modified by:   sahildua2305
-# @Last Modified time: 2016-01-21 04:51:41
+# @Last Modified time: 2016-01-21 04:55:58
 
-from django.http import HttpResponse, HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+
+# https://docs.djangoproject.com/en/1.9/ref/urlresolvers/
+from django.core.urlresolvers import reverse
 
 # Import the RegistrationForm, LoginForm classes from the forms.py in the same module
 from .forms import RegistrationForm, LoginForm
@@ -51,8 +54,7 @@ def register(request):
 				)
 
 				new_candidate.save()
-
-				return render(request, "R_hire/registration/success.html")
+				return HttpResponseRedirect(reverse('r_hire:login'))
 			else :
 				form.add_error(None, 'Email ID already exists')
 
