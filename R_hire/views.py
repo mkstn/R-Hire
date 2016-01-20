@@ -3,15 +3,15 @@
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
 # @Last Modified by:   sahildua2305
-# @Last Modified time: 2016-01-21 04:24:25
+# @Last Modified time: 2016-01-21 04:51:41
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponse
 from django.shortcuts import render
 
 # Import the RegistrationForm, LoginForm classes from the forms.py in the same module
 from .forms import RegistrationForm, LoginForm
 
-# Import Candidate model 
+# Import Candidate model from the same module
 from .models import Candidate
 
 
