@@ -3,7 +3,7 @@
 # @Author: sahildua2305
 # @Date:   2016-01-18 22:57:52
 # @Last Modified by:   Prabhakar Gupta
-# @Last Modified time: 2016-01-19 02:23:29
+# @Last Modified time: 2016-01-21 03:23:18
 
 from django import forms
 
@@ -25,4 +25,14 @@ class RegistrationForm(forms.Form):
 		password2 = self.cleaned_data['password2']
 		if password != password2:
 			raise forms.ValidationError("Passwords do not match.")
+
+		if len(password) < 6:
+			raise forms.ValidationError("Passwords should be atleast 6 characters long")
+
 		return password2
+
+
+
+class LoginForm(forms.Form):
+	email = forms.EmailField(label='Enter your email', widget=forms.EmailInput(attrs={'class' : 'form-control'}))
+	password = forms.CharField(widget=forms.PasswordInput(attrs={'class' : 'form-control'}), label='Enter your password')
