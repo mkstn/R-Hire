@@ -3,7 +3,7 @@
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
 # @Last Modified by:   sahildua2305
-# @Last Modified time: 2016-01-21 04:14:55
+# @Last Modified time: 2016-01-29 01:28:52
 
 from django.conf.urls import url, include, patterns
 
@@ -14,9 +14,12 @@ urlpatterns = [
 	# ex: /r-hire/
 	url(r'^$', views.index, name='index'),
 	
-	# ex /r-hire/register/
+	# ex: /r-hire/register/
 	url(r'^register/', views.register, name='register'),
 	
-	# ex /r-hire/login/
+	# ex: /r-hire/login/
 	url(r'^login/', views.login, name='login'),
+
+	# ex: /r-hire/logout/
+	url(r'^logout/', views.logout, name='logout'),
 ]

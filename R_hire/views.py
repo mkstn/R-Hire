@@ -3,7 +3,7 @@
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
 # @Last Modified by:   sahildua2305
-# @Last Modified time: 2016-01-21 04:55:58
+# @Last Modified time: 2016-01-29 01:27:31
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -84,7 +84,7 @@ def login(request):
 			email 		= request.POST['email']
 			password 	= request.POST['password']
 
-			# Make an check_candidate object to check whether 
+			# Make an check_candidate object to check whether
 			# email id and password make up a valid combination
 			check_candidate = Candidate.objects.filter(
 				email = email,
@@ -96,10 +96,15 @@ def login(request):
 			if (check_candidate.count() != 1) :
 				form.add_error(None, 'Invalid email - password combination')
 			else:
-				# TO DO
-				# add session control functions here
-				# since candidate exists 
+				# just for testing purpose, REMOVE IT LATER
 				form.add_error(None, 'Logged in')
+
+				# set session variables
+				request.session['login_uid'] = check_candidate[0].id
+				request.session['login_fname'] = check_candidate[0].fname
+
+				# just for testing purpose, REMOVE IT LATER
+				form.add_error(None, 'Sessions set for candidate name = ' + str(request.session['login_fname']) + ' id = ' + str(request.session['login_uid']))
 
 	# This means that the request is a GET request. So we need to
 	# create an instance of the LoginForm class and render it in the template
@@ -111,3 +116,17 @@ def login(request):
 	# be rendered with the entered data and error messages. Otherwise an empty
 	# form will be rendered.
 	return render(request, "R_hire/registration/login_form.html", {"form" : form})
+
+
+def logout(request):
+
+	# Delete `login_uid` session variable, if present
+	if 'login_uid' in request.session:
+		del request.session['login_uid']
+
+	# Delete `login_fname` session variable, if present
+	if 'login_fname' in request.session:
+		del request.session['login_fname']
+
+	# Send HttpResponse confirming the log out
+	return HttpResponse("You're logged out!")
