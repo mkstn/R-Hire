@@ -3,7 +3,7 @@
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
 # @Last Modified by:   sahildua2305
-# @Last Modified time: 2016-01-29 01:27:31
+# @Last Modified time: 2016-01-29 02:31:27
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -106,6 +106,8 @@ def login(request):
 				# just for testing purpose, REMOVE IT LATER
 				form.add_error(None, 'Sessions set for candidate name = ' + str(request.session['login_fname']) + ' id = ' + str(request.session['login_uid']))
 
+				return HttpResponseRedirect(reverse('r_hire:view-profile'))
+
 	# This means that the request is a GET request. So we need to
 	# create an instance of the LoginForm class and render it in the template
 	else:
@@ -130,3 +132,8 @@ def logout(request):
 
 	# Send HttpResponse confirming the log out
 	return HttpResponse("You're logged out!")
+
+
+def viewProfile(request):
+	# render the profile/profile.html
+	return render(request, 'R_hire/profile/profile.html', {})

@@ -3,7 +3,7 @@
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
 # @Last Modified by:   sahildua2305
-# @Last Modified time: 2016-01-29 01:28:52
+# @Last Modified time: 2016-01-29 02:28:37
 
 from django.conf.urls import url, include, patterns
 
@@ -22,4 +22,7 @@ urlpatterns = [
 
 	# ex: /r-hire/logout/
 	url(r'^logout/', views.logout, name='logout'),
+
+	# ex: /r-hire/profile/
+	url(r'^profile/', views.viewProfile, name='view-profile'),
 ]
