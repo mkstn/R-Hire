@@ -5,9 +5,9 @@
     </head>
     <body>
     {% if request.session.login_uid == None %}
-    	<p>Not logged in</p>
+        <p>Not logged in</p>
     {% else %}
-    	<p>Logged in</p>
+        <p>Logged in as {{ request.session.login_fname }}</p>
     {% endif %}
     </body>
 </html>
