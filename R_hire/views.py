@@ -3,7 +3,7 @@
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
 # @Last Modified by:   sahildua2305
-# @Last Modified time: 2016-01-29 02:31:27
+# @Last Modified time: 2016-01-29 02:40:33
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -93,18 +93,12 @@ def login(request):
 
 			# if combination is not correct then throw an error
 			# else login the candidate
-			if (check_candidate.count() != 1) :
+			if (check_candidate.count() != 1):
 				form.add_error(None, 'Invalid email - password combination')
 			else:
-				# just for testing purpose, REMOVE IT LATER
-				form.add_error(None, 'Logged in')
-
 				# set session variables
 				request.session['login_uid'] = check_candidate[0].id
 				request.session['login_fname'] = check_candidate[0].fname
-
-				# just for testing purpose, REMOVE IT LATER
-				form.add_error(None, 'Sessions set for candidate name = ' + str(request.session['login_fname']) + ' id = ' + str(request.session['login_uid']))
 
 				return HttpResponseRedirect(reverse('r_hire:view-profile'))
 
