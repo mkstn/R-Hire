@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static "R_hire/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "R_hire/css/google-fonts.css" %}">
+    <link rel="stylesheet" href="{% static "R_hire/css/account.css" %}">
+    <title>{% block title %}My amazing site{% endblock %}</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+		    {% block content %}{% endblock %}
+		</div>
+	</div>
+
+<script type="text/javascript" src="{% static "R_hire/js/jquery-2.2.0.min.js" %}"></script>
+<script type="text/javascript" src="{% static "R_hire/js/bootstrap.min.js" %}"></script>
+
+</body>
+</html>
