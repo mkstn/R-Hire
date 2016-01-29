@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
-# @Last Modified by:   Prabhakar Gupta
-# @Last Modified time: 2016-01-30 00:50:14
+# @Last Modified by:   sahildua2305
+# @Last Modified time: 2016-01-30 01:45:04
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -153,5 +153,17 @@ def editProfile(request):
 	if 'login_uid' not in request.session:
 		return HttpResponseRedirect(reverse('r_hire:login'))
 
-	# Render the profile/profile.html, if logged in
-	return render(request, 'R_hire/profile/edit.html', {})
+	# Render the profile/edit.html template with the currently saved user information, if logged in
+	current_user = Candidate.objects.get(id = request.session['login_uid'])
+
+	context = {
+		'u_fname': current_user.fname,
+		'u_lname': current_user.lname,
+		'u_email': current_user.email,
+		'u_summary': current_user.summary,
+		'u_current_location': current_user.current_location,
+		'u_gender': current_user.gender,
+		'u_resume_url': current_user.resume_url,
+	}
+
+	return render(request, 'R_hire/profile/edit.html', context)

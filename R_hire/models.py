@@ -3,7 +3,7 @@
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
 # @Last Modified by:   sahildua2305
-# @Last Modified time: 2016-01-21 04:06:13
+# @Last Modified time: 2016-01-30 01:55:47
 
 
 from __future__ import unicode_literals
@@ -143,4 +143,3 @@ class Candidate(models.Model):
 
 	def __str__(self):
 		return self.fname
-
