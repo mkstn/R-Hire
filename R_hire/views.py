@@ -3,7 +3,7 @@
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
 # @Last Modified by:   sahildua2305
-# @Last Modified time: 2016-01-29 23:45:34
+# @Last Modified time: 2016-01-29 23:51:23
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -129,8 +129,8 @@ def logout(request):
 	if 'login_fname' in request.session:
 		del request.session['login_fname']
 
-	# Send HttpResponse confirming the log out
-	return HttpResponse("You're logged out!")
+	# Redirect to login page (or home page, TODO later)
+	return HttpResponseRedirect(reverse('r_hire:login'))
 
 
 def viewProfile(request):
