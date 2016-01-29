@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
-# @Last Modified by:   Prabhakar Gupta
-# @Last Modified time: 2016-01-30 00:55:48
+# @Last Modified by:   sahildua2305
+# @Last Modified time: 2016-01-30 02:10:08
 
 from django.conf.urls import url, include, patterns
 
@@ -28,4 +28,7 @@ urlpatterns = [
 
 	# ex: /r-hire/profile/edit
 	url(r'^profile/edit$', views.editProfile, name='edit-profile'),
+
+	# ex: /r-hire/profile/save
+	url(r'^profile/update$', views.updateProfile, name='update-profile'),
 ]

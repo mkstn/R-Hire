@@ -3,7 +3,7 @@
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
 # @Last Modified by:   sahildua2305
-# @Last Modified time: 2016-01-30 01:45:04
+# @Last Modified time: 2016-01-30 02:27:19
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -167,3 +167,22 @@ def editProfile(request):
 	}
 
 	return render(request, 'R_hire/profile/edit.html', context)
+
+
+def updateProfile(request):
+
+	# Redirect for login, if not logged in already
+	if 'login_uid' not in request.session:
+		return HttpResponseRedirect(reverse('r_hire:login'))
+
+	current_user = Candidate.objects.get(id = request.session['login_uid'])
+
+	# Update all the keys that come with the form
+	for key in request.GET:
+		current_user.__setattr__(key, request.GET[key])
+
+	# Save the user with updated information
+	current_user.save()
+
+	# Redirect to edit-profile form page again after updating information
+	return HttpResponseRedirect(reverse('r_hire:edit-profile'))
