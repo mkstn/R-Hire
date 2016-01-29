@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
-# @Last Modified by:   sahildua2305
-# @Last Modified time: 2016-01-30 00:16:09
+# @Last Modified by:   Prabhakar Gupta
+# @Last Modified time: 2016-01-30 00:50:14
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -148,6 +148,10 @@ def viewProfile(request):
 
 
 def editProfile(request):
+	
+	# Redirect for login, if not logged in already
+	if 'login_uid' not in request.session:
+		return HttpResponseRedirect(reverse('r_hire:login'))
 
 	# Render the profile/profile.html, if logged in
-	return render(request, 'R_hire/profile/profile.html', {})
+	return render(request, 'R_hire/profile/edit.html', {})
