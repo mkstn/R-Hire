@@ -3,15 +3,16 @@
 <html>
 <head>
 
-{% include "R_hire/profile/include_stylesheets.html" %}
+{% include "R_hire/profile/panels/include_stylesheets.html" %}
+<title>{% block title %}{% endblock %}</title>
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
 
-	{% include "R_hire/profile/panel_header.html" %}
+	{% include "R_hire/profile/panels/panel_header.html" %}
 
-	{% include "R_hire/profile/panel_leftbar.html" %}
+	{% include "R_hire/profile/panels/panel_leftbar.html" %}
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
@@ -20,16 +21,16 @@
 		
 		</div><!-- /.content-wrapper -->
 
-	{% include "R_hire/profile/panel_footer.html" %}
+	{% include "R_hire/profile/panels/panel_footer.html" %}
 
-	{% include "R_hire/profile/panel_rightbar.html" %}
+	{% include "R_hire/profile/panels/panel_rightbar.html" %}
 
 		<!-- Add the sidebar's background. This div must be placed
 		immediately after the control sidebar -->
 		<div class="control-sidebar-bg"></div>
 	</div><!-- ./wrapper -->
 
-{% include "R_hire/profile/include_scripts.html" %}
+{% include "R_hire/profile/panels/include_scripts.html" %}
 
 </body>
 </html>
