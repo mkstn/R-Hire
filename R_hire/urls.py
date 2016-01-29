@@ -3,7 +3,7 @@
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
 # @Last Modified by:   sahildua2305
-# @Last Modified time: 2016-01-29 02:28:37
+# @Last Modified time: 2016-01-30 00:13:34
 
 from django.conf.urls import url, include, patterns
 
@@ -25,4 +25,7 @@ urlpatterns = [
 
 	# ex: /r-hire/profile/
 	url(r'^profile/', views.viewProfile, name='view-profile'),
+
+	# ex: /r-hire/profile/edit
+	url(r'^profile/edit', views.editProfile, name='edit-profile'),
 ]

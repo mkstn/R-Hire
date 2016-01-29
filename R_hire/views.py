@@ -3,7 +3,7 @@
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
 # @Last Modified by:   sahildua2305
-# @Last Modified time: 2016-01-29 23:51:23
+# @Last Modified time: 2016-01-30 00:16:09
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -53,9 +53,13 @@ def register(request):
 					password	= password,
 				)
 
+				# Save the new candidate into database
 				new_candidate.save()
+
+				# Redirect to the login page
 				return HttpResponseRedirect(reverse('r_hire:login'))
 			else :
+				# Add form error that email ID already exists in the database
 				form.add_error(None, 'Email ID already exists')
 
 	# This means that the request is a GET request. So we need to
@@ -140,4 +144,10 @@ def viewProfile(request):
 		return HttpResponseRedirect(reverse('r_hire:login'))
 
 	# render the profile/profile.html, if logged in
+	return render(request, 'R_hire/profile/profile.html', {})
+
+
+def editProfile(request):
+
+	# Render the profile/profile.html, if logged in
 	return render(request, 'R_hire/profile/profile.html', {})
