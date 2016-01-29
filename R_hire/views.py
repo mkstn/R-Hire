@@ -3,7 +3,7 @@
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
 # @Last Modified by:   sahildua2305
-# @Last Modified time: 2016-01-29 02:40:33
+# @Last Modified time: 2016-01-29 23:45:34
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -105,6 +105,11 @@ def login(request):
 	# This means that the request is a GET request. So we need to
 	# create an instance of the LoginForm class and render it in the template
 	else:
+		# Redirect to profile view, if logged in already
+		if 'login_uid' in request.session and 'login_fname' in request.session:
+			return HttpResponseRedirect(reverse('r_hire:view-profile'))
+
+		# If user is not already logged in and the request is GET, load the simple login form
 		form = LoginForm()
 
 	# Render the login form template with a LoginForm instance. If the
@@ -129,5 +134,10 @@ def logout(request):
 
 
 def viewProfile(request):
-	# render the profile/profile.html
+
+	# Redirect for login, if not logged in already
+	if 'login_uid' not in request.session:
+		return HttpResponseRedirect(reverse('r_hire:login'))
+
+	# render the profile/profile.html, if logged in
 	return render(request, 'R_hire/profile/profile.html', {})
