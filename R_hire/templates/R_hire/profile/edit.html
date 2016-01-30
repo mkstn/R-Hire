@@ -12,34 +12,31 @@
 	<div class="row">
 		<section class="col-lg-12 connectedSortable">
 			<div class="box box-default">
-				<form role="form">
+				<form role="form" action="{% url 'r_hire:update-profile' %}" method="GET">
 					<div class="box-body">
 						<div class="form-group">
 							<label>First Name *</label>
-							<input type="text" class="form-control" value="" placeholder="First Name of Candidate (eg - John)" required>
+							<input type="text" class="form-control" value="{{ u_fname }}" placeholder="First Name of Candidate (eg - John)" name="fname" required>
 						</div>
 						<div class="form-group">
 							<label>Last Name *</label>
-							<input type="text" class="form-control" value="" placeholder="Last Name of Candidate (eg - Cena)" required>
-						</div>
-						<div class="form-group">
-							<label>Email address</label>
-							<input type="email" class="form-control" placeholder="Enter your Email">
+							<input type="text" class="form-control" value="{{ u_lname }}" placeholder="Last Name of Candidate (eg - Cena)" name="lname" required>
 						</div>
 						<div class="form-group">
 							<label>Summary</label>
-							<textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+							<textarea class="form-control" rows="3" placeholder="Your brief summary" name="summary">{% if u_summary != None %}{{ u_summary }}{% else %}{{ "" }}{% endif %}</textarea>
 						</div>
 						<div class="form-group">
 							<label>Gender</label>
-							<select class="form-control">
-								<option>Male</option>
-								<option>Female</option>
+							<select class="form-control" name="gender">
+								<option value="" {% if u_gender == None %}selected{% endif %}>Choose</option>
+								<option value="M" {% if u_gender == "M" %}selected{% endif %}>Male</option>
+								<option value="F" {% if u_gender == "F" %}selected{% endif %}>Female</option>
 							</select>
 						</div>
 						<div class="form-group">
 							<label>Resume URL</label>
-							<input type="text" class="form-control" value="" placeholder="Resume URL" required>
+							<input type="text" class="form-control" value="{% if u_resume_url != None %}{{ u_resume_url }}{% endif %}" placeholder="Resume URL" name="resume_url">
 						</div>
 					</div>
 
