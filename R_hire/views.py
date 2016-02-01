@@ -3,7 +3,7 @@
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
 # @Last Modified by:   sahildua2305
-# @Last Modified time: 2016-01-30 02:27:19
+# @Last Modified time: 2016-01-30 02:31:23
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -124,7 +124,6 @@ def login(request):
 
 
 def logout(request):
-
 	# Delete `login_uid` session variable, if present
 	if 'login_uid' in request.session:
 		del request.session['login_uid']
@@ -138,7 +137,6 @@ def logout(request):
 
 
 def viewProfile(request):
-
 	# Redirect for login, if not logged in already
 	if 'login_uid' not in request.session:
 		return HttpResponseRedirect(reverse('r_hire:login'))
@@ -148,7 +146,6 @@ def viewProfile(request):
 
 
 def editProfile(request):
-	
 	# Redirect for login, if not logged in already
 	if 'login_uid' not in request.session:
 		return HttpResponseRedirect(reverse('r_hire:login'))
@@ -170,7 +167,6 @@ def editProfile(request):
 
 
 def updateProfile(request):
-
 	# Redirect for login, if not logged in already
 	if 'login_uid' not in request.session:
 		return HttpResponseRedirect(reverse('r_hire:login'))
@@ -179,6 +175,8 @@ def updateProfile(request):
 
 	# Update all the keys that come with the form
 	for key in request.GET:
+		# TODO:
+		# Handle invalid key error if some invalid key is sent in request which is not present in the object
 		current_user.__setattr__(key, request.GET[key])
 
 	# Save the user with updated information
