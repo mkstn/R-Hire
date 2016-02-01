@@ -29,7 +29,7 @@
 						<div class="form-group">
 							<label>Gender</label>
 							<select class="form-control" name="gender">
-								<option value="" {% if u_gender == None %}selected{% endif %}>Choose</option>
+								<option value="" {% if u_gender == None %}selected{% endif %} disabled>Choose</option>
 								<option value="M" {% if u_gender == "M" %}selected{% endif %}>Male</option>
 								<option value="F" {% if u_gender == "F" %}selected{% endif %}>Female</option>
 							</select>
