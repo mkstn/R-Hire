@@ -3,26 +3,27 @@
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
 # @Last Modified by:   sahildua2305
-# @Last Modified time: 2016-01-30 01:55:47
+# @Last Modified time: 2016-02-01 22:44:54
 
 
 from __future__ import unicode_literals
+from django.utils.translation import ugettext_lazy as _
 
 from django.db import models
 
 
-GENDER_LIST = (	('M', 'Male'),
-				('F', 'Female'),
-				('ND', 'Not Defined'),
+GENDER_LIST = (	('M', _('Male')),
+				('F', _('Female')),
+				('ND', _('Not Defined')),
 				)
 
 
-WEBSITE_TYPE = (('na', 'unrecognized'),
-				('gh', 'Github'),
-				('ln', 'LinkedIn'),
-				('pw', 'Personal Website'),
-				('tw', 'Twitter'),
-				('fb', 'Facebook'),
+WEBSITE_TYPE = (('na', _('unrecognized')),
+				('gh', _('Github')),
+				('ln', _('LinkedIn')),
+				('pw', _('Personal Website')),
+				('tw', _('Twitter')),
+				('fb', _('Facebook')),
 				)
 
 
@@ -125,17 +126,17 @@ class Website(models.Model):
 
 class Candidate(models.Model):
 	fname = models.CharField(verbose_name='First Name',max_length=200,blank=False)
-	lname = models.CharField(verbose_name='Last Name', max_length=200,blank=True,null=True)
+	lname = models.CharField(verbose_name='Last Name',max_length=200,blank=True,null=True)
 	
 	photo_url = models.URLField(default=None,blank=True,null=True)
-	last_school = models.CharField(verbose_name='Last School Name', max_length=1000,blank=True,null=True)
+	last_school = models.CharField(verbose_name='Last School Name',max_length=1000,blank=True,null=True)
 	
 	email = models.EmailField(unique=True,blank=False)
 	password = models.CharField(max_length=500,blank=False)
 	
 	summary = models.TextField(max_length=None,blank=True,null=True)
 	current_location = models.CharField(max_length=100,blank=True,null=True)
-	gender = models.CharField(max_length=2, choices=GENDER_LIST,blank=True,null=True)
+	gender = models.CharField(max_length=2,choices=GENDER_LIST,default='ND',blank=True,null=True)
 	resume_url = models.URLField(default=None,blank=True,null=True)
 	contact_number = models.CharField(max_length=10,blank=True,null=True)
 	address = models.TextField(max_length=None,blank=True,null=True)
