@@ -3,7 +3,7 @@
 # @Author: sahildua2305
 # @Date:   2016-01-18 22:57:52
 # @Last Modified by:   Sahil Dua
-# @Last Modified time: 2016-03-09 00:04:54
+# @Last Modified time: 2016-03-09 00:08:49
 
 from django import forms
 from django.utils.translation import ugettext_lazy as _
@@ -76,3 +76,4 @@ class EditProfileForm(forms.Form):
 	resume_url = forms.URLField(label='Resume URL', widget=forms.TextInput(attrs={'class' : 'form-control'}))
 
 	summary = forms.CharField(label='Summary', widget=forms.TextInput(attrs={'class': 'form-control'}))
+
