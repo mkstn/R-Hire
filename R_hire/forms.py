@@ -3,7 +3,7 @@
 # @Author: sahildua2305
 # @Date:   2016-01-18 22:57:52
 # @Last Modified by:   Sahil Dua
-# @Last Modified time: 2016-03-09 00:08:49
+# @Last Modified time: 2016-03-09 01:24:49
 
 from django import forms
 from django.utils.translation import ugettext_lazy as _
@@ -69,11 +69,11 @@ class LoginForm(forms.Form):
 
 
 class EditProfileForm(forms.Form):
-	fname = forms.CharField(label='First name', max_length=200, widget=forms.TextInput(attrs={'class' : 'form-control'}))
-	lname = forms.CharField(label='Last name', max_length=200, widget=forms.TextInput(attrs={'class' : 'form-control'}), required=False)
+	fname = forms.CharField(label='First name', widget=forms.TextInput(attrs={'class' : 'form-control'}))
+	lname = forms.CharField(label='Last name', widget=forms.TextInput(attrs={'class' : 'form-control'}), required=False)
 
-	gender = forms.ChoiceField(label='Gender', choices=GENDER_LIST, widget=forms.TextInput(attrs={'class' : 'form-control'}))
-	resume_url = forms.URLField(label='Resume URL', widget=forms.TextInput(attrs={'class' : 'form-control'}))
+	gender = forms.ChoiceField(label='Gender', choices=GENDER_LIST, widget=forms.TextInput(attrs={'class' : 'form-control'}), required=False)
+	resume_url = forms.URLField(label='Resume URL', widget=forms.TextInput(attrs={'class' : 'form-control'}), required=False)
 
-	summary = forms.CharField(label='Summary', widget=forms.TextInput(attrs={'class': 'form-control'}))
+	summary = forms.CharField(label='Summary', widget=forms.Textarea(attrs={'class': 'form-control'}), required=False)
 
