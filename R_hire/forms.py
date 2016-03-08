@@ -3,7 +3,7 @@
 # @Author: sahildua2305
 # @Date:   2016-01-18 22:57:52
 # @Last Modified by:   Sahil Dua
-# @Last Modified time: 2016-03-08 23:49:53
+# @Last Modified time: 2016-03-09 00:04:54
 
 from django import forms
 from django.utils.translation import ugettext_lazy as _
@@ -72,6 +72,7 @@ class EditProfileForm(forms.Form):
 	fname = forms.CharField(label='First name', max_length=200, widget=forms.TextInput(attrs={'class' : 'form-control'}))
 	lname = forms.CharField(label='Last name', max_length=200, widget=forms.TextInput(attrs={'class' : 'form-control'}), required=False)
 
-	gender = forms.ChoiceField(label='Gender', max_length=2, choices=GENDER_LIST, blank=True, null=True)
-	resume_url = forms.URLField(default=None, blank=True, null=True)
+	gender = forms.ChoiceField(label='Gender', choices=GENDER_LIST, widget=forms.TextInput(attrs={'class' : 'form-control'}))
+	resume_url = forms.URLField(label='Resume URL', widget=forms.TextInput(attrs={'class' : 'form-control'}))
 
+	summary = forms.CharField(label='Summary', widget=forms.TextInput(attrs={'class': 'form-control'}))
