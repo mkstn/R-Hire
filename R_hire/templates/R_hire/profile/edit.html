@@ -4,6 +4,8 @@
 
 {% block content %}
 
+{% load r_hire_choices %}
+
 <section class="content-header">
     <h1>Candidate Profile Edit</h1>
 </section>
@@ -14,34 +16,48 @@
 			<div class="box box-default">
 				<form role="form" action="{% url 'r_hire:update-profile' %}" method="GET">
 					<div class="box-body">
+						{% for field in form %}
 						<div class="form-group">
-							<label>First Name *</label>
-							<input type="text" class="form-control" value="{{ u_fname }}" placeholder="First Name of Candidate (eg - John)" name="fname" required>
+							<!-- Render the field label tag for each field -->
+							{{ field.label_tag }}
+
+							<!-- If this field is required, display a * next to the field label -->
+							{% if field.field.required %}
+								*
+							{% endif %}
+							<br>
+
+							{% if field.widget|widget_type == "ChoiceField" %}
+
+								"sss"
+
+							{% else %}
+								
+								<!-- Render the field -->
+								{{ field }}
+								{{ field|widget_type }}
+
+							{% endif %}
+							
+							<!-- Iterate over the field's errors, if any and display
+							them one by one in a error alert
+							-->
+							{% if field.errors %}
+								{% for error in field.errors %}
+									<div class="alert alert-danger alert-dismissible fade in" role="alert">
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">×</span>
+										</button>
+										<strong>{{ error }}</strong>
+									</div>	
+								{% endfor %}
+							{% endif %}
 						</div>
-						<div class="form-group">
-							<label>Last Name *</label>
-							<input type="text" class="form-control" value="{{ u_lname }}" placeholder="Last Name of Candidate (eg - Cena)" name="lname" required>
-						</div>
-						<div class="form-group">
-							<label>Summary</label>
-							<textarea class="form-control" rows="3" placeholder="Your brief summary" name="summary">{% if u_summary != None %}{{ u_summary }}{% else %}{{ "" }}{% endif %}</textarea>
-						</div>
-						<div class="form-group">
-							<label>Gender</label>
-							<select class="form-control" name="gender">
-								<option value="" {% if u_gender == None %}selected{% endif %} disabled>Choose</option>
-								<option value="M" {% if u_gender == "M" %}selected{% endif %}>Male</option>
-								<option value="F" {% if u_gender == "F" %}selected{% endif %}>Female</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label>Resume URL</label>
-							<input type="text" class="form-control" value="{% if u_resume_url != None %}{{ u_resume_url }}{% endif %}" placeholder="Resume URL" name="resume_urll">
-						</div>
+						{% endfor %}
 					</div>
 
 					<div class="box-footer">
-						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="submit" name="save-changes" class="btn btn-primary btn-lg not-round">Save</button>
 					</div>
                 </form>
 			</div>
