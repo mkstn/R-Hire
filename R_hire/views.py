@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
-# @Last Modified by:   sahildua2305
-# @Last Modified time: 2016-01-30 02:31:23
+# @Last Modified by:   Sahil Dua
+# @Last Modified time: 2016-03-09 01:36:25
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -12,7 +12,7 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse
 
 # Import the RegistrationForm, LoginForm classes from the forms.py in the same module
-from .forms import RegistrationForm, LoginForm
+from .forms import RegistrationForm, LoginForm, EditProfileForm
 
 # Import Candidate model from the same module
 from .models import Candidate
@@ -150,20 +150,50 @@ def editProfile(request):
 	if 'login_uid' not in request.session:
 		return HttpResponseRedirect(reverse('r_hire:login'))
 
-	# Render the profile/edit.html template with the currently saved user information, if logged in
-	current_user = Candidate.objects.get(id = request.session['login_uid'])
+	# If the request method is POST, it means that the form has been submitted
+	# and we need to validate it
+	if request.method == "POST":
+		# Create a EditProfileForm instance with the submitted data
+		form = EditProfileForm(request.POST)
 
-	context = {
-		'u_fname': current_user.fname,
-		'u_lname': current_user.lname,
-		'u_email': current_user.email,
-		'u_summary': current_user.summary,
-		'u_current_location': current_user.current_location,
-		'u_gender': current_user.gender,
-		'u_resume_url': current_user.resume_url,
-	}
+		# is_valid validates a form and returns
+		# True if it is valid and
+		# False if it is invalid
+		if form.is_valid():
+			email 		= request.POST['email']
+			password 	= request.POST['password']
 
-	return render(request, 'R_hire/profile/edit.html', context)
+	# This means that the request is a GET request. So we need to
+	# create an instance of the EditProfileForm class and render it in the template
+	else:
+
+		context = {
+			'u_fname': 'Sahil',
+			'u_lname': 'Dua',
+		}
+
+		form = EditProfileForm()
+
+	# Render the form template with a EditProfileForm instance. If the
+	# form was submitted and the data found to be invalid, the template will
+	# be rendered with the entered data and error messages. Otherwise an empty
+	# form will be rendered.
+	return render(request, "R_hire/profile/edit.html", {"form" : form})
+
+	# # Render the profile/edit.html template with the currently saved user information, if logged in
+	# current_user = Candidate.objects.get(id = request.session['login_uid'])
+
+	# context = {
+	# 	'u_fname': current_user.fname,
+	# 	'u_lname': current_user.lname,
+	# 	'u_email': current_user.email,
+	# 	'u_summary': current_user.summary,
+	# 	'u_current_location': current_user.current_location,
+	# 	'u_gender': current_user.gender,
+	# 	'u_resume_url': current_user.resume_url,
+	# }
+
+	# return render(request, 'R_hire/profile/edit.html', context)
 
 
 def updateProfile(request):
