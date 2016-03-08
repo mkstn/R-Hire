@@ -1,3 +1,9 @@
+<!-- {% if 'login_lname' in request.session %}
+	name is {{ request.session.login_fname }}
+{% else %}
+	name is {{ request.session.login_fname }} {{ request.session.login_lname }}
+{% endif %} -->
+
 <header class="main-header">
 	<a href="{% url 'r_hire:index' %}" class="logo">
 		<span class="logo-mini"><b>A</b>LT</span>
@@ -12,13 +18,13 @@
 				<li class="dropdown user user-menu">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-						<span class="hidden-xs">Alexander Pierce</span>
+						<span class="hidden-xs">{{ request.session.login_lname }}</span>
 					</a>
 					<ul class="dropdown-menu">
 						<li class="user-header">
 							<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 							<p>
-								Alexander Pierce - Web Developer
+								{{ request.session.login_fname }}
 								<small>Member since Nov. 2012</small>
 							</p>
 						</li>
@@ -34,5 +40,5 @@
 				</li>
 			</ul>
 		</div>
-	</nav>
+		</nav>
 </header>
