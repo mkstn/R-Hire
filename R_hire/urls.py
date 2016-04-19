@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
-# @Last Modified by:   sahildua2305
-# @Last Modified time: 2016-01-30 02:10:08
+# @Last Modified by:   Prabhakar Gupta
+# @Last Modified time: 2016-04-20 03:33:56
 
 from django.conf.urls import url, include, patterns
 
@@ -31,4 +31,7 @@ urlpatterns = [
 
 	# ex: /r-hire/profile/save
 	url(r'^profile/update$', views.updateProfile, name='update-profile'),
+
+	# ex: /r-hire/profile/add-coding-profiles
+	url(r'^profile/add-coding-profiles$', views.addCodingProfiles, name='add-coding-profiles'),
 ]

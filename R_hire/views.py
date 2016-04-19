@@ -3,7 +3,7 @@
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
 # @Last Modified by:   Prabhakar Gupta
-# @Last Modified time: 2016-03-09 02:16:54
+# @Last Modified time: 2016-04-20 03:35:17
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -217,3 +217,7 @@ def updateProfile(request):
 
 	# Redirect to edit-profile form page again after updating information
 	return HttpResponseRedirect(reverse('r_hire:edit-profile'))
+
+
+def addCodingProfiles(request):
+	return render(request, 'R_hire/profile/add-coding-profiles.html', {})
