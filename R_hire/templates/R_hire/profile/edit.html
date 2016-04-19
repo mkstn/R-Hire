@@ -26,14 +26,12 @@
 							<br>
 
 							{% if field.widget|widget_type == "ChoiceField" %}
-
 								"sss"
 
 							{% else %}
-								
+
 								<!-- Render the field -->
 								{{ field }}
-								{{ field|widget_type }}
 
 							{% endif %}
 							
