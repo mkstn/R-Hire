@@ -2,13 +2,8 @@
 # -*- coding: utf-8 -*-
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
-<<<<<<< HEAD
 # @Last Modified by:   Prabhakar Gupta
-# @Last Modified time: 2016-03-09 01:15:39
-=======
-# @Last Modified by:   Sahil Dua
-# @Last Modified time: 2016-03-09 01:36:25
->>>>>>> master
+# @Last Modified time: 2016-03-09 02:16:54
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
