@@ -1,0 +1,100 @@
+{% extends "R_hire/profile/main.html" %}
+
+{% block title %}R_Hire | Candidate Add Coding Profiles{% endblock %}
+
+{% block content %}
+
+<section class="content-header">
+    <h1>Candidate Add Coding Profiles</h1>
+</section>
+
+<section class="content">
+	<div class="row">
+		<section class="col-lg-12 connectedSortable">
+			<div class="box box-default">
+				<form role="form" action="{% url 'r_hire:update-profile' %}" method="GET">
+					<div class="box-body">
+						<div class="col-md-12">
+							<div class="col-md-8">
+								<div class="form-group">
+									<input class="form-control" id="" name="" placeholder="Codeforces" type="text" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<input class="form-control" type="text" placeholder="Rank/Score here" disabled/>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-8">
+								<div class="form-group">
+									<input class="form-control" id="" name="" placeholder="Codechef" type="text" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<input class="form-control" type="text" placeholder="Rank/Score here" disabled/>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-8">
+								<div class="form-group">
+									<input class="form-control" id="" name="" placeholder="SPOJ" type="text" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<input class="form-control" type="text" placeholder="Rank/Score here" disabled/>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-8">
+								<div class="form-group">
+									<input class="form-control" id="" name="" placeholder="TopCoder" type="text" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<input class="form-control" type="text" placeholder="Rank/Score here" disabled/>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-8">
+								<div class="form-group">
+									<input class="form-control" id="" name="" placeholder="HackerEarth" type="text" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<input class="form-control" type="text" placeholder="Rank/Score here" disabled/>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-8">
+								<div class="form-group">
+									<input class="form-control" id="" name="" placeholder="HackerRank" type="text" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<input class="form-control" type="text" placeholder="Rank/Score here" disabled/>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="box-footer">
+						<button type="submit" name="update-profiles" class="btn btn-primary btn-lg not-round">Update</button>
+					</div>
+                </form>
+			</div>
+		</section>
+	</div>
+</section>
+
+{% endblock %}

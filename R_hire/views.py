@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # @Author: Sahil Dua
 # @Date:   2016-01-08 22:48:10
-# @Last Modified by:   Sahil Dua
-# @Last Modified time: 2016-03-09 01:36:25
+# @Last Modified by:   Prabhakar Gupta
+# @Last Modified time: 2016-04-20 03:35:17
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -101,8 +101,11 @@ def login(request):
 				form.add_error(None, 'Invalid email - password combination')
 			else:
 				# set session variables
-				request.session['login_uid'] = check_candidate[0].id
-				request.session['login_fname'] = check_candidate[0].fname
+				request.session['login_uid'] 		= check_candidate[0].id
+				request.session['login_fname'] 		= check_candidate[0].fname
+				request.session['login_lname'] 		= check_candidate[0].lname
+				request.session['login_photo_url'] 	= check_candidate[0].photo_url
+				request.session['login_cur_loc'] 	= check_candidate[0].current_location
 
 				return HttpResponseRedirect(reverse('r_hire:view-profile'))
 
@@ -214,3 +217,7 @@ def updateProfile(request):
 
 	# Redirect to edit-profile form page again after updating information
 	return HttpResponseRedirect(reverse('r_hire:edit-profile'))
+
+
+def addCodingProfiles(request):
+	return render(request, 'R_hire/profile/add-coding-profiles.html', {})
